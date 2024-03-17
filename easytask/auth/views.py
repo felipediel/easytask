@@ -38,7 +38,7 @@ def register_user(
     new_user = User(**body.model_dump())
     new_user.password_hash = bcrypt.generate_password_hash(
         body.password.get_secret_value()
-    )
+    ).decode("utf-8")
     new_user.save()
     resp_data = UserSchema.model_validate(
         new_user, from_attributes=True
