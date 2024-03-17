@@ -1,0 +1,10 @@
+[project]
+name = "easytask"
+description = "Easytask"
+dynamic = ["version"]
+authors = [{name="Felipe Martins Diel", email="felipemartinsdiel@gmail.com"}]
+dependencies = ["flask"]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
