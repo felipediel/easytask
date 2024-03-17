@@ -1,87 +1,80 @@
-# Guia de Instalação
+# Easytask
 
-## Executando a aplicação
+Este projeto destina-se a solucionar um desafio de programação de um processo de recrutamento e seleção. Para entender os requisitos da aplicação, acesse o arquivo `REQUIREMENTS.md`.
+
+## Guia de Instalação
 
 Existem várias opções para executar esta aplicação, desde a configuração manual até a utilização de contêineres Docker. Escolha a opção que melhor se adapta às suas necessidades e ambiente.
 
 ### Opção 1: Configuração Manual
 
-1. **Configuração do Banco de Dados**:
-   - Configure manualmente um banco de dados PostgreSQL, MySQL ou outro suportado.
-   - Ajuste a variável de ambiente `SQLALCHEMY_DATABASE_URI` no arquivo `.env` para a URI do seu banco de dados recém-configurado.
-
-```bash
+1. Configure manualmente um banco de dados PostgreSQL, MySQL ou outro suportado. Depois, ajuste a variável de ambiente `SQLALCHEMY_DATABASE_URI` no arquivo `.env` para a URI do seu banco de dados recém-configurado.
+```
 SQLALCHEMY_DATABASE_URI=your_database_uri
 ```
 
-2. **Configuração do Ambiente Virtual**:
-
+2. Configure o ambiente virtual:
 ```bash
 $ python3.10 -m venv .venv
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-3. **Aplicação de Migrações**:
-
+3. Aplique as migrações:
 ```bash
-$ flask db upgrade
+$ flask --app easytask:create_app db upgrade
 ```
 
-4. **Execução da Aplicação**:
-
+4. Execute a aplicação:
 ```bash
 $ python manage.py run
 ```
 
 ### Opção 2: Construção e Execução de uma Imagem Docker da Aplicação
 
-1. **Configuração do Banco de Dados**:
-Configure um banco de dados separadamente e ajuste a variável de ambiente `SQLALCHEMY_DATABASE_URI` no arquivo `.env`.
+1. Configure um banco de dados separadamente e ajuste a variável de ambiente `SQLALCHEMY_DATABASE_URI` no arquivo `.env` para a URI do seu banco de dados recém-configurado.
 
-2. **Construção da Imagem Docker**:
+2. Construa a imagem Docker:
 
 ```bash
 $ docker build -t easytask .
 ```
 
-3. **Aplicação de Migrações**:
+3. Aplique as migrações:
 ```bash
-$ docker run --env-file .env easytask flask db upgrade
+$ docker run --env-file .env easytask flask --app easytask:create_app db upgrade
 ```
 
-4. **Execução da Aplicação**:
+4. Execute a aplicação
 ```bash
 $ docker run --env-file .env easytask python manage.py run
 ```
 
-### Opção 3: Compor, Construir e Executar a API e o Banco de Dados Juntos
-Construa e execute a API e o banco de dados com um único comando:
-
+### Opção 3: Composição e Execução da API e Banco de Dados Juntos
+1. Construa e execute a API e o banco de dados com um único comando:
 ```bash
 $ docker compose up --build
 ```
 
-## Acessando o shell no contêiner
-Ocasionalmente, pode ser necessário acessar o shell diretamente dentro do seu contêiner. Veja como você pode fazer isso:
+2. Aplique as migrações:
+```bash
+$ docker exec CONTAINER_ID flask --app easytask:create_app db upgrade
+```
 
+## Acessando o Shell no Contêiner
+Ocasionalmente, pode ser necessário acessar o shell diretamente dentro do seu contêiner. Veja como você pode fazer isso:
 ```bash
 $ docker exec -it CONTAINER_ID sh
 ```
 
 ## Criando Migrações
 Sempre que você alterar um modelo, você deve criar e aplicar migrações:
-
 ```bash
 flask db migrate -m "Migração inicial."
 flask db upgrade
 ``` 
 
-Agora que você já sabe executar a aplicação, vamos ver o que ela pode fazer.
-
-# Como usar a API
-
-Este é um guia básico sobre como usar a API.
+Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela pode fazer.
 
 ## Endpoints Disponíveis
 
@@ -96,7 +89,7 @@ Este é um guia básico sobre como usar a API.
 {
   "name": "Nome do Usuário",
   "email": "exemplo@dominio.com",
-  "password": "senhaDoUsuario"
+  "password": "senha"
 }
 ```
 
@@ -110,7 +103,7 @@ Este é um guia básico sobre como usar a API.
 ```json
 {
   "email": "exemplo@dominio.com",
-  "password": "senhaDoUsuario"
+  "password": "senha"
 }
 ```
 
