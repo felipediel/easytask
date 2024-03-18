@@ -22,6 +22,6 @@ def map_gateway_http_status(status: int | str | HTTPStatus) -> HTTPStatus:
     except KeyError:
         if status >= 500:
             return HTTPStatus.BAD_GATEWAY
-        elif status >= 400:
+        if status >= 400:
             return HTTPStatus.INTERNAL_SERVER_ERROR
         return status

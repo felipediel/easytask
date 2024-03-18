@@ -12,6 +12,7 @@ ENV WORKING_DIR /home/easytask
 WORKDIR ${WORKING_DIR}
 
 COPY easytask easytask
+COPY migrations migrations
 COPY manage.py .
 COPY requirements.txt .
 
