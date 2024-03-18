@@ -34,6 +34,7 @@ def handle_http_exc(err: HTTPException):
 def handle_validation_error(error: ValidationError):
     """Handle validation error."""
     status = HTTPStatus.BAD_REQUEST
+    reason = "Validation error"
     context = {}
 
     input_types = ["form_params", "body_params", "path_params", "query_params"]
@@ -50,7 +51,7 @@ def handle_validation_error(error: ValidationError):
             ]
 
     return error_response(
-        reason=status.description, context=context, status=status
+        reason=reason, context=context, status=status
     )
 
 
