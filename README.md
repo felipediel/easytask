@@ -281,11 +281,11 @@ login_data = {
 }
 
 # Registrar usuário
-register_response = requests.post(f"{base_url}/v1/auth/register", json=register_data)
+register_response = requests.post(f"{base_url}/api/v1/auth/register", json=register_data)
 print(register_response.json())
 
 # Fazer login
-login_response = requests.post(f"{base_url}/v1/auth/login", json=login_data)
+login_response = requests.post(f"{base_url}/api/v1/auth/login", json=login_data)
 print(login_response.json())
 
 # Extrair o token de acesso
@@ -293,11 +293,11 @@ access_token = login_response.json()["access_token"]
 
 # Usar o token de acesso para obter a lista de tarefas
 headers = {"Authorization": f"Bearer {access_token}"}
-tasks_response = requests.get(f"{base_url}/v1/tasks", headers=headers)
+tasks_response = requests.get(f"{base_url}/api/v1/tasks", headers=headers)
 print(tasks_response.json())
 
 # Fazer logout
-logout_response = requests.delete(f"{base_url}/v1/auth/logout", headers=headers)
+logout_response = requests.delete(f"{base_url}/api/v1/auth/logout", headers=headers)
 print(logout_response.json())
 ```
 
