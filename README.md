@@ -90,7 +90,7 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 
 ### Registro de Usuário
 
-- **URL**: `/v1/auth/register`
+- **URL**: `/api/v1/auth/register`
 - **Método HTTP**: `POST`
 - **Descrição**: Registra um novo usuário no sistema.
 - **Corpo da Requisição (JSON)**:
@@ -112,7 +112,7 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 
 ### Login de Usuário
 
-- **URL**: `/v1/auth/login`
+- **URL**: `/api/v1/auth/login`
 - **Método HTTP**: `POST`
 - **Descrição**: Autentica um usuário no sistema.
 - **Corpo da Requisição (JSON)**:
@@ -132,7 +132,7 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 
 ### Logout de Usuário
 
-- **URL**: `/v1/auth/logout`
+- **URL**: `/api/v1/auth/logout`
 - **Método HTTP**: `DELETE`
 - **Descrição**: Invalida o token de acesso do usuário.
 - **Cabeçalho da Requisição**:
@@ -147,7 +147,7 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 
 ### Atualização do Token de Acesso
 
-- **URL**: `/v1/auth/refresh`
+- **URL**: `/api/v1/auth/refresh`
 - **Método HTTP**: `POST`
 - **Descrição**: Gera um novo token de acesso usando um token de atualização.
 - **Cabeçalho da Requisição**:
@@ -161,7 +161,7 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 
 ### Obtenção da Lista de Tarefas
 
-- **URL**: `/v1/tasks/`
+- **URL**: `/api/v1/tasks/`
 - **Método HTTP**: `GET`
 - **Cabeçalho da Requisição**:
   - `Authorization: Bearer <access_token>`
