@@ -45,6 +45,43 @@ def test_register_user(app: Flask, client: FlaskClient, database: SQLAlchemy):
     assert user.email == test_user_data["email"]
 
 
+def test_register_same_user_twice_returns_400(
+    app: Flask, client: FlaskClient, database: SQLAlchemy
+):
+    """Test that an attempt to register the same user returns 400."""
+    test_user_data = {
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "password": "johnnybegoodtonight"
+    }
+    create_test_user(**test_user_data)
+
+    # These fields can change
+    test_user_data["name"] = "John Donuts"
+    test_user_data["password"] = "johnnybegoodtomorrow"
+
+    with app.test_request_context():
+        response = client.post(
+            url_for("auth.register_user"), json=test_user_data
+        )
+
+    assert_response_error(response, "Validation error", HTTPStatus.BAD_REQUEST)
+
+    response_data = response.json
+    error = response_data["error"]
+    assert "context" in error
+    context = error["context"]
+    assert "body_params" in context
+    body_params = context["body_params"]
+    assert len(body_params) == 1
+    error_detail = body_params[0]
+    assert isinstance(error_detail, dict)
+    assert error_detail.get("type") == "value_error"
+    assert error_detail.get("loc") == ["email"]
+    assert error_detail.get("msg") == "Value error, E-mail already exists"
+    assert error_detail.get("input") == "john@doe.com"
+
+
 def test_login_user(app: Flask, client: FlaskClient, database: SQLAlchemy):
     """Test user login."""
     test_user_data = {

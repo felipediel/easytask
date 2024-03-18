@@ -17,7 +17,7 @@ class UserSchema(BaseModel):
     id: int | None = Field(title="Id")
     name: str = Field(title="Name")
     email: EmailStr = Field(title="E-mail")
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra="ignore")
 
 
 class UserRegisterSchema(BaseModel):
@@ -26,14 +26,14 @@ class UserRegisterSchema(BaseModel):
     name: str = Field(title="Name")
     email: EmailStr = Field(title="E-mail")
     password: SecretStr = Field(title="Password", exclude=True)
-    model_config = ConfigDict(extra='ignore')
+    model_config = ConfigDict(extra="ignore")
 
     @field_validator("email")
     @classmethod
     def validate_email(cls, value: EmailStr) -> EmailStr:
         """Validate e-mail."""
         if User.query.filter_by(email=value).scalar():
-            raise ValueError('E-mail already exists.')
+            raise ValueError("E-mail already exists")
         return value
 
 
