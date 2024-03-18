@@ -52,5 +52,5 @@ def load_child_app(app: Flask, app_name: str, url_prefix="/") -> None:
     except TypeError as err:
         raise ImproperlyConfigured(
             f"The 'init_app()' function of the '{app_name}' app has invalid "
-            "parameters."
+            "parameters"
         ) from err
