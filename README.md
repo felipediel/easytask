@@ -94,12 +94,19 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 - **Método HTTP**: `POST`
 - **Descrição**: Registra um novo usuário no sistema.
 - **Corpo da Requisição (JSON)**:
-
 ```json
 {
-  "name": "Nome do Usuário",
-  "email": "exemplo@dominio.com",
-  "password": "senha"
+  "name": "<Nome do usuário>",
+  "email": "<E-mail do usuário>",
+  "password": "<Senha do usuário>"
+}
+```
+- **Corpo da Resposta (JSON)**:
+```json
+{
+  "id": "<Id do usuário>",
+  "name": "<Nome do usuário>",
+  "email": "<E-mail do usuário>"
 }
 ```
 
@@ -109,11 +116,17 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 - **Método HTTP**: `POST`
 - **Descrição**: Autentica um usuário no sistema.
 - **Corpo da Requisição (JSON)**:
-
 ```json
 {
-  "email": "exemplo@dominio.com",
-  "password": "senha"
+  "email": "<E-mail do usuário>",
+  "password": "<Senha do usuário>"
+}
+```
+- **Corpo da Resposta (JSON)**:
+```json
+{
+  "access_token": "<Token de acesso>",
+  "refresh_token": "<Token de renovação>"
 }
 ```
 
@@ -124,6 +137,13 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 - **Descrição**: Invalida o token de acesso do usuário.
 - **Cabeçalho da Requisição**:
   - `Authorization: Bearer <access_token>`
+  - ou `Authorization: Bearer <refresh_token>`
+- **Corpo da Resposta (JSON)**:
+```json
+{
+  "message": "Access revoked."
+}
+```
 
 ### Atualização do Token de Acesso
 
@@ -132,6 +152,12 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 - **Descrição**: Gera um novo token de acesso usando um token de atualização.
 - **Cabeçalho da Requisição**:
   - `Authorization: Bearer <refresh_token>`
+- **Corpo da Resposta (JSON)**:
+```json
+{
+  "access_token": "<Token de acesso>"
+}
+```
 
 ### Obtenção da Lista de Tarefas
 
@@ -143,10 +169,35 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
   - `start` (int): Índice inicial da lista (padrão: 0)
   - `end` (int, opcional): Índice final da lista
   - `limit` (int): Número máximo de resultados a serem retornados (padrão: 5)
+- **Corpo da Resposta (JSON)**:
+```json
+[
+  {
+    "id": "<Id da tarefa>",
+    "title": "<Título da tarefa>"
+  },
+  {
+    "id": "<Id da tarefa>",
+    "title": "<Título da tarefa>"
+  },
+  {
+    "id": "<Id da tarefa>",
+    "title": "<Título da tarefa>"
+  },
+  {
+    "id": "<Id da tarefa>",
+    "title": "<Título da tarefa>"
+  },
+  {
+    "id": "<Id da tarefa>",
+    "title": "<Título da tarefa>"
+  },
+]
+```
 
 ## 5. Mensagens de Erro
 
-A seguir estão os erros que podem ser retornados pela aplicação, juntamente com seus códigos HTTP correspondentes:
+A seguir estão os status HTTP de erros que podem ser retornados pela aplicação:
 
 - **BAD_REQUEST (400)**: Solicitação inválida.
 
@@ -155,6 +206,8 @@ A seguir estão os erros que podem ser retornados pela aplicação, juntamente c
 - **FORBIDDEN (403)**: Acesso proibido ao recurso.
 
 - **NOT_FOUND (404)**: Recurso não encontrado.
+
+- **UNPROCESSABLE_ENTITY (422)**: Recurso em situação improcessável.
 
 - **INTERNAL_SERVER_ERROR (500)**: Erro interno do servidor.
 
@@ -166,16 +219,16 @@ A seguir estão os erros que podem ser retornados pela aplicação, juntamente c
 
 ### Formato de Retorno
 
-Todos os erros seguem o mesmo formato:
+Todas as mensagens de erro seguem o mesmo formato:
 
 ```json
 {
     "error": {
-        "reason": "Descrição do erro"
+        "reason": "<Descrição do erro>"
     }
 }
 ```
-Os erros de validação (código 400) contêm uma chave adicional de contexto para auxiliar na resolução do problema. Eles podem ser classificados em diferentes tipos de erros, dependendo da origem do problema:
+Os erros de validação (status HTTP 400) contêm uma chave adicional de contexto para auxiliar na resolução do problema. Eles podem ser classificados em diferentes tipos de erros, dependendo da origem do problema:
 
 - **Erro de Formulário (form_error)**: Indica problemas relacionados aos dados enviados via formulário.
 - **Erro no Corpo da Requisição (body_error)**: Refere-se a erros identificados no corpo da requisição.
