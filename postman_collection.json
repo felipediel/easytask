@@ -96,6 +96,62 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"john@doe.com\"\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@doe.com\",\n    \"password\": \"johnnybegood\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:56:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "174"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"context\": {\n            \"body_params\": [\n                {\n                    \"input\": \"john@doe.com\",\n                    \"loc\": [\n                        \"email\"\n                    ],\n                    \"msg\": \"Value error, E-mail already exists.\",\n                    \"type\": \"value_error\"\n                }\n            ]\n        },\n        \"reason\": \"Validation error\"\n    }\n}"
 						}
 					]
 				},
@@ -186,6 +242,62 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwNzIwNjk2LCJqdGkiOiI1ZjRiZTgzNi04MTRhLTRlOGQtOTljMC1iNGNlZGIyOTA5ZDIiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoiam9obkBkb2UuY29tIiwibmJmIjoxNzEwNzIwNjk2LCJjc3JmIjoiNzI3MjRjYTgtMGQzYi00MGYzLWI1NzItMDkxYmE4NmI4MmFhIiwiZXhwIjoxNzEwNzI0Mjk2fQ.UXP1xB51eZbFs09HhKB1SqkAClxn2AXDsq6zQPZ01wQ\",\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDcyMDY5NiwianRpIjoiN2QyYTdmMTItMTA4Yy00OGE0LWE1NzItM2YxMDI0YjgwZDRiIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJqb2huQGRvZS5jb20iLCJuYmYiOjE3MTA3MjA2OTYsImNzcmYiOiI0M2FlNzc2ZC1jM2M1LTQ0MmMtOTgxMi0xZjNhYjVmZTBmZjAiLCJleHAiOjE3MTMzMTI2OTZ9.hV5paoLn4a3kcAehLt5kGznFgyT_jP03oMXBw69oTWE\"\n}"
+						},
+						{
+							"name": "Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"john@doe.com\",\n    \"password\": \"johnnybegoodtomorrow\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 03:00:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"reason\": \"Invalid username or password\"\n    }\n}"
 						}
 					]
 				},
@@ -265,6 +377,53 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Access revoked.\"\n}"
+						},
+						{
+							"name": "Invalid Token",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/logout",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 03:03:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"reason\": \"Invalid token\"\n    }\n}"
 						}
 					]
 				},
@@ -344,6 +503,53 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDcyMDc4MSwianRpIjoiYzNlYTMyODgtNzg5MS00YzVhLWE0MDUtYzg3OTNlZmEwOWYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5AZG9lLmNvbSIsIm5iZiI6MTcxMDcyMDc4MSwiY3NyZiI6IjllZDQxZWExLWQ0M2UtNDlmNi1hOWU4LWUxNTMzNTQ3MWZkZiIsImV4cCI6MTcxMDcyNDM4MX0.s3ZEIca4cflInbQ7kRatxbFWx3qkD0rRmY_a7Zf_uAU\"\n}"
+						},
+						{
+							"name": "Invalid Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/refresh",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 03:04:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"reason\": \"Invalid token\"\n    }\n}"
 						}
 					]
 				}
@@ -462,6 +668,197 @@
 							],
 							"cookie": [],
 							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"delectus aut autem\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"quis ut nam facilis et officia qui\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"fugiat veniam minus\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"et porro tempora\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"laboriosam mollitia et enim quasi adipisci quia provident illum\"\n    }\n]"
+						},
+						{
+							"name": "Token Has Expired",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/tasks?start=0&limit=5",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0",
+											"description": "Índice inicial"
+										},
+										{
+											"key": "end",
+											"value": "",
+											"description": "Índice final",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Máximo de resultados"
+										}
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 03:05:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"reason\": \"Token has expired\"\n    }\n}"
+						},
+						{
+							"name": "Invalid Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/tasks?start=0&limit=5",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0",
+											"description": "Índice inicial"
+										},
+										{
+											"key": "end",
+											"value": "",
+											"description": "Índice final",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Máximo de resultados"
+										}
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 03:06:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"reason\": \"Invalid token\"\n    }\n}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/tasks?start=0&limit=5&end=abc",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0",
+											"description": "Índice inicial"
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Máximo de resultados"
+										},
+										{
+											"key": "end",
+											"value": "abc",
+											"description": "Índice final"
+										}
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.13"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 03:08:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "198"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"context\": {\n            \"query_params\": [\n                {\n                    \"input\": \"abc\",\n                    \"loc\": [\n                        \"end\"\n                    ],\n                    \"msg\": \"Input should be a valid integer, unable to parse string as an integer\",\n                    \"type\": \"int_parsing\"\n                }\n            ]\n        },\n        \"reason\": \"Validation error\"\n    }\n}"
 						}
 					]
 				}
