@@ -1,0 +1,471 @@
+{
+	"info": {
+		"_postman_id": "4a5675e5-c3e5-4056-8186-3f94d5da65dc",
+		"name": "Easytask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33671213"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@doe.com\",\n    \"password\": \"johnnybegood\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@doe.com\",\n    \"password\": \"johnnybegood\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.9"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Mar 2024 23:21:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"john@doe.com\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"john@doe.com\",\n    \"password\": \"johnnybegood\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"john@doe.com\",\n    \"password\": \"johnnybegood\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.9"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 00:11:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "718"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwNzIwNjk2LCJqdGkiOiI1ZjRiZTgzNi04MTRhLTRlOGQtOTljMC1iNGNlZGIyOTA5ZDIiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoiam9obkBkb2UuY29tIiwibmJmIjoxNzEwNzIwNjk2LCJjc3JmIjoiNzI3MjRjYTgtMGQzYi00MGYzLWI1NzItMDkxYmE4NmI4MmFhIiwiZXhwIjoxNzEwNzI0Mjk2fQ.UXP1xB51eZbFs09HhKB1SqkAClxn2AXDsq6zQPZ01wQ\",\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDcyMDY5NiwianRpIjoiN2QyYTdmMTItMTA4Yy00OGE0LWE1NzItM2YxMDI0YjgwZDRiIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJqb2huQGRvZS5jb20iLCJuYmYiOjE3MTA3MjA2OTYsImNzcmYiOiI0M2FlNzc2ZC1jM2M1LTQ0MmMtOTgxMi0xZjNhYjVmZTBmZjAiLCJleHAiOjE3MTMzMTI2OTZ9.hV5paoLn4a3kcAehLt5kGznFgyT_jP03oMXBw69oTWE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzEwNzIwNjk2LCJqdGkiOiI1ZjRiZTgzNi04MTRhLTRlOGQtOTljMC1iNGNlZGIyOTA5ZDIiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoiam9obkBkb2UuY29tIiwibmJmIjoxNzEwNzIwNjk2LCJjc3JmIjoiNzI3MjRjYTgtMGQzYi00MGYzLWI1NzItMDkxYmE4NmI4MmFhIiwiZXhwIjoxNzEwNzI0Mjk2fQ.UXP1xB51eZbFs09HhKB1SqkAClxn2AXDsq6zQPZ01wQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/logout",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.9"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 00:12:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Access revoked.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDcyMDY5NiwianRpIjoiN2QyYTdmMTItMTA4Yy00OGE0LWE1NzItM2YxMDI0YjgwZDRiIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJqb2huQGRvZS5jb20iLCJuYmYiOjE3MTA3MjA2OTYsImNzcmYiOiI0M2FlNzc2ZC1jM2M1LTQ0MmMtOTgxMi0xZjNhYjVmZTBmZjAiLCJleHAiOjE3MTMzMTI2OTZ9.hV5paoLn4a3kcAehLt5kGznFgyT_jP03oMXBw69oTWE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/auth/refresh",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/auth/refresh",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.9"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 00:13:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "359"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDcyMDc4MSwianRpIjoiYzNlYTMyODgtNzg5MS00YzVhLWE0MDUtYzg3OTNlZmEwOWYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5AZG9lLmNvbSIsIm5iZiI6MTcxMDcyMDc4MSwiY3NyZiI6IjllZDQxZWExLWQ0M2UtNDlmNi1hOWU4LWUxNTMzNTQ3MWZkZiIsImV4cCI6MTcxMDcyNDM4MX0.s3ZEIca4cflInbQ7kRatxbFWx3qkD0rRmY_a7Zf_uAU\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Retrieve Tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDcyMDc4MSwianRpIjoiYzNlYTMyODgtNzg5MS00YzVhLWE0MDUtYzg3OTNlZmEwOWYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvaG5AZG9lLmNvbSIsIm5iZiI6MTcxMDcyMDc4MSwiY3NyZiI6IjllZDQxZWExLWQ0M2UtNDlmNi1hOWU4LWUxNTMzNTQ3MWZkZiIsImV4cCI6MTcxMDcyNDM4MX0.s3ZEIca4cflInbQ7kRatxbFWx3qkD0rRmY_a7Zf_uAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/tasks?start=0&limit=5",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "0",
+									"description": "Índice inicial"
+								},
+								{
+									"key": "end",
+									"value": "",
+									"description": "Índice final",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "Máximo de resultados"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/v1/tasks?start=0&limit=5",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "0",
+											"description": "Índice inicial"
+										},
+										{
+											"key": "end",
+											"value": "",
+											"description": "Índice final",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "Máximo de resultados"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.0.1 Python/3.10.9"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 00:13:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "252"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"delectus aut autem\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"quis ut nam facilis et officia qui\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"fugiat veniam minus\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"et porro tempora\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"laboriosam mollitia et enim quasi adipisci quia provident illum\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}
