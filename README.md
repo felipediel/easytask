@@ -195,6 +195,8 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
 ]
 ```
 
+É possível interagir com esses endpoints via Postman carregando a [coleção de requisições](postman_collection.json).
+
 ## 5. Mensagens de Erro
 
 A seguir estão os status HTTP de erros que podem ser retornados pela aplicação:
