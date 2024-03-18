@@ -2,16 +2,17 @@ version: '3'
 services:
   db:
     image: postgres:16.2
+    restart: always
     env_file:
       - .db.env
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -t 1"]
-      interval: 5s
+      interval: 1s
       timeout: 5s
-      retries: 5
-      start_period: 5s
+      retries: 10
+      start_period: 2s
   api:
     build:
       context: .

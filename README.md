@@ -22,7 +22,7 @@ $ pip install -r requirements.txt
 
 3. Aplique as migrações:
 ```bash
-$ flask --app easytask:create_app db upgrade
+$ python manage.py db upgrade
 ```
 
 4. Execute a aplicação:
@@ -42,7 +42,7 @@ $ docker build -t easytask .
 
 3. Aplique as migrações:
 ```bash
-$ docker run --env-file .env easytask flask --app easytask:create_app db upgrade
+$ docker run --env-file .env easytask python manage.py db upgrade
 ```
 
 4. Execute a aplicação
@@ -58,7 +58,7 @@ $ docker compose up --build
 
 2. Aplique as migrações:
 ```bash
-$ docker exec CONTAINER_ID flask --app easytask:create_app db upgrade
+$ docker exec CONTAINER_ID python manage.py db upgrade
 ```
 
 ## Acessando o Shell no Contêiner
@@ -70,8 +70,8 @@ $ docker exec -it CONTAINER_ID sh
 ## Criando Migrações
 Sempre que você alterar um modelo, você deve criar e aplicar migrações:
 ```bash
-flask db migrate -m "Migração inicial."
-flask db upgrade
+python manage.py db migrate -m "Migração inicial."
+python manage.py db upgrade
 ``` 
 
 Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela pode fazer.
