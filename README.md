@@ -1,10 +1,10 @@
 # Easytask
 
-Este projeto destina-se a solucionar um desafio de programação de um processo de recrutamento e seleção. Para entender os requisitos da aplicação, acesse o arquivo `REQUIREMENTS.md`.
+Este projeto destina-se a solucionar um desafio de programação de um processo de recrutamento e seleção. Para entender os requisitos da aplicação, acesse o arquivo [REQUIREMENTS.md](REQUIREMENTS.md).
 
-## Guia de Instalação
+## 1. Guia de Instalação
 
-Existem várias opções para executar esta aplicação, desde a configuração manual até a utilização de contêineres Docker. Escolha a opção que melhor se adapta às suas necessidades e ambiente.
+Existem várias opções para instalar e executar esta aplicação, desde a configuração manual até a utilização de contêineres Docker. Escolha a opção que melhor se adapta às suas necessidades e ambiente.
 
 ### Opção 1: Configuração Manual
 
@@ -61,13 +61,21 @@ $ docker compose up --build
 $ docker exec CONTAINER_ID python manage.py db upgrade
 ```
 
-## Acessando o Shell no Contêiner
+## 2. Acessando o Shell no Contêiner
+
 Ocasionalmente, pode ser necessário acessar o shell diretamente dentro do seu contêiner. Veja como você pode fazer isso:
+
+### Bash
 ```bash
 $ docker exec -it CONTAINER_ID sh
 ```
 
-## Criando Migrações
+### Python shell
+```bash
+$ docker exec -it CONTAINER_ID python3 manage.py shell
+```
+
+## 3. Criando Migrações
 Sempre que você alterar um modelo, você deve criar e aplicar migrações:
 ```bash
 python manage.py db migrate -m "Migração inicial."
@@ -76,7 +84,7 @@ python manage.py db upgrade
 
 Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela pode fazer.
 
-## Endpoints Disponíveis
+## 4. Endpoints Disponíveis
 
 ### Registro de Usuário
 
@@ -134,7 +142,67 @@ Agora que você já sabe instalar e executar a aplicação, vamos ver o que ela 
   - `end` (int, opcional): Índice final da lista
   - `limit` (int): Número máximo de resultados a serem retornados (padrão: 5)
 
-## Exemplo de Uso
+## 5. Mensagens de Erro
+
+A seguir estão os erros que podem ser retornados pela aplicação, juntamente com seus códigos HTTP correspondentes:
+
+- **BAD_REQUEST (400)**: Solicitação inválida.
+
+- **UNAUTHORIZED (401)**: Sem autorização para acessar o recurso.
+
+- **FORBIDDEN (403)**: Acesso proibido ao recurso.
+
+- **NOT_FOUND (404)**: Recurso não encontrado.
+
+- **INTERNAL_SERVER_ERROR (500)**: Erro interno do servidor.
+
+- **SERVICE_UNAVAILABLE (503)**: Serviço temporariamente indisponível.
+
+- **BAD_GATEWAY (502)**: Serviço externo retornou uma resposta inválida ou malformada.
+
+- **GATEWAY_TIMEOUT (504)**: Tempo limite de resposta do serviço externo excedido.
+
+### Formato de Retorno
+
+Todos os erros seguem o mesmo formato:
+
+```json
+{
+    "error": {
+        "reason": "Descrição do erro"
+    }
+}
+```
+Os erros de validação (código 400) contêm uma chave adicional de contexto para auxiliar na resolução do problema. Eles podem ser classificados em diferentes tipos de erros, dependendo da origem do problema:
+
+- **Erro de Formulário (form_error)**: Indica problemas relacionados aos dados enviados via formulário.
+- **Erro no Corpo da Requisição (body_error)**: Refere-se a erros identificados no corpo da requisição.
+- **Erro no Caminho do Recurso (path_error)**: Sinaliza problemas relacionados ao caminho do recurso requisitado.
+- **Erro nos Parâmetros de Consulta (query_error)**: Indica erros encontrados nos parâmetros de consulta da requisição.
+
+Aqui está um exemplo do formato de retorno com o contexto:
+
+```json
+{
+    "error": {
+        "reason": "Erro de validação",
+        "context": {
+            "body_params": [
+                {
+                    "type": "value_error",
+                    "loc": ["email"],
+                    "msg": "E-mail já existe",
+                    "input": "john@doe.com"
+                }
+            ]
+        }
+    }
+}
+```
+
+Neste exemplo, o erro específico é indicado como um erro no corpo da requisição (body_error), e detalhes adicionais são fornecidos no contexto (context), como o tipo de erro (type), o local onde ocorreu (loc), a mensagem de erro (msg) e o valor de entrada que causou o erro (input).
+
+## 6. Exemplo de Uso
 
 Aqui está um exemplo de como usar a API com o Python usando a biblioteca `requests`:
 
