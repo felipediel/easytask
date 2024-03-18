@@ -1,4 +1,6 @@
 # Easytask
+[![Python application](https://github.com/felipediel/easytask/actions/workflows/python-app.yaml/badge.svg?branch=master)](https://github.com/felipediel/easytask/actions/workflows/python-app.yaml)
+[![codecov](https://codecov.io/gh/felipediel/easytask/graph/badge.svg?token=NIX5W0QEZJ)](https://codecov.io/gh/felipediel/easytask)
 
 Este projeto destina-se a solucionar um desafio de programação de um processo de recrutamento e seleção. Para entender os requisitos da aplicação, acesse o arquivo [REQUIREMENTS.md](REQUIREMENTS.md).
 
