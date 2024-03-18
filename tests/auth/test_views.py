@@ -209,3 +209,26 @@ def test_refresh_access_token(
     assert "access_token" in response_data
     decoded_token = decode_token(response_data["access_token"])
     assert decoded_token["sub"] == test_user.email
+
+
+def test_refresh_access_with_revoked_token_returns_401(
+    app: Flask, client: FlaskClient, database: SQLAlchemy
+):
+    """Test that an attempt to refresh with a revoked token returns 401."""
+    test_user = create_test_user()
+    refresh_token = create_refresh_token(identity=test_user.email)
+
+    jti = decode_token(refresh_token, allow_expired=True)["jti"]
+    blocklist = TokenBlocklist(jti=jti, type="refresh")
+    blocklist.save()
+
+    headers = {"Authorization": f"Bearer {refresh_token}"}
+
+    with app.test_request_context():
+        response = client.post(
+            url_for("auth.refresh_access_token"), headers=headers
+        )
+
+    assert_response_error(
+        response, "Token has been revoked", HTTPStatus.UNAUTHORIZED
+    )
